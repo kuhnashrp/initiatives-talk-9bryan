@@ -1,6 +1,5 @@
 ---
-version: "3.7"
-name: rp-playground
+name: initiatives-talk
 networks:
   redpanda_network:
     driver: bridge
@@ -123,6 +122,7 @@ services:
     entrypoint: /bin/sh
     command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
     environment:
+      CONFIG_FILEPATH: /tmp/config.yml
       CONSOLE_CONFIG_FILE: |
         kafka:
           brokers: ["redpanda-0:9092"]
@@ -177,8 +177,6 @@ services:
       - redpanda-0
       - redpanda-1
       - redpanda-2
-      - prometheus
-      - grafana
       - mariadb
       - wordpress
     ports:
@@ -197,8 +195,6 @@ services:
       - redpanda-0
       - redpanda-1
       - redpanda-2
-      - prometheus
-      - grafana
       - mariadb
       - wordpress
       - debezium
